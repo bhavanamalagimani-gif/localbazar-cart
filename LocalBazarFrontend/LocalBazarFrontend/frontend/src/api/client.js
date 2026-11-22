@@ -1,9 +1,4 @@
-export const API_BASE = (
-  import.meta.env.VITE_API_URL ||
-  (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? ''
-    : 'https://ecology-comment-syndication-bids.trycloudflare.com')
-).replace(/\/+$/, '');
+export const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
 
 const API = API_BASE ? `${API_BASE}/api` : '/api';
 
