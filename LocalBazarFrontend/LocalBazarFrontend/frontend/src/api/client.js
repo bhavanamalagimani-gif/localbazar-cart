@@ -1,4 +1,12 @@
-export const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+export const API_BASE = (
+  import.meta.env.VITE_API_URL ||
+  (typeof window !== 'undefined' &&
+  (window.location.hostname.includes('trycloudflare.com') ||
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1')
+    ? ''
+    : 'https://lesson-bind-pike-senator.trycloudflare.com')
+).replace(/\/+$/, '');
 
 const API = API_BASE ? `${API_BASE}/api` : '/api';
 
