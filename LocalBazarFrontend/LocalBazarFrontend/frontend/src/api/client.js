@@ -1,4 +1,10 @@
-export const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+export const API_BASE = (
+  import.meta.env.VITE_API_URL ||
+  (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? ''
+    : 'https://ecology-comment-syndication-bids.trycloudflare.com')
+).replace(/\/+$/, '');
+
 const API = API_BASE ? `${API_BASE}/api` : '/api';
 
 export function resolveImageUrl(url) {
@@ -11,7 +17,8 @@ export function resolveImageUrl(url) {
   ) {
     return url;
   }
-  return `${API_BASE}${url.startsWith('/') ? url : `/${url}`}`;
+  const base = API_BASE || '';
+  return `${base}${url.startsWith('/') ? url : `/${url}`}`;
 }
 
 function storedToken() {
